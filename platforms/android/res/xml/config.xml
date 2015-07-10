@@ -13,10 +13,10 @@
     <allow-intent href="market:*" />
     <name>openeObs</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        open-eObs for the MioCare range of devices
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+    <author email="office@neovahealth.co.uk" href="http://www.neovahealth.co.uk">
+        Neova Health open-eObs Team
     </author>
     <content src="index.html" />
     <allow-navigation href="*" />
