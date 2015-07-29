@@ -158,8 +158,8 @@ legend {
   display: block;
   width: 100%;
   padding: 0;
-  /*margin-top: 0.7em;*/
-  /*margin-bottom: 0.2em;*/
+  margin-top: 0.7em;
+  margin-bottom: 0.2em;
   font-size: 2em;
   line-height: inherit;
   color: #282828;
@@ -1277,6 +1277,7 @@ rect.green {
 .full-modal iframe {
   width: 100%;
   height: 100%;
+  background-color: white;
 }
 #table-content,
 #graph-content {
@@ -1595,8 +1596,16 @@ text.title {
     text-shadow: 0px 1px 0px #666666;
 }
 
+#popup_iframe iframe, #popup_image img{
+    width: 100%;
+}
+
+#popup_iframe iframe{
+    border: 0 solid black;
+}
+
 #databaseselect, .app #deviceready{
-	display: none;
+  display: none;
 }
 
 #myform input, #myform button {

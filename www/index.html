@@ -36,7 +36,7 @@
         <link rel="stylesheet" type="text/css" href="css/main.css">
         <title>open-eObs</title>
     </head>
-    <body>
+    <body onload="onLoad()">
 
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
@@ -47,10 +47,74 @@
         <img class="logo" src="img/logo.png">
     </div>
 
+
+    <script>
+    var httpd = null;
+    function onLoad() {
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
+    function onDeviceReady() {
+        httpd = ( cordova && cordova.plugins && cordova.plugins.CorHttpd ) ? cordova.plugins.CorHttpd : null;
+
+        startServer("");
+    }
+    function updateStatus() {
+        document.getElementById('location').innerHTML = "document.location.href: " + document.location.href;
+        if( httpd ) {
+            httpd.getURL(function(url){
+                if(url.length > 0) {
+                    document.getElementById('url').innerHTML = "server is up: <a href='" + url + "' target='_blank'>" + url + "</a>";
+                } else {
+                    document.getElementById('url').innerHTML = "server is down.";
+                }
+            });
+            httpd.getLocalPath(function(path){
+                document.getElementById('localpath').innerHTML = "<br/>localPath: " + path;
+            });
+        } else {
+            alert('CorHttpd plugin not available/ready.');
+        }
+    }
+    function startServer( wwwroot ) {
+        if ( httpd ) {
+            httpd.getURL(function(url){
+                if(url.length > 0) {
+                    document.getElementById('url').innerHTML = "server is up: <a href='" + url + "' target='_blank'>" + url + "</a>";
+                } else {
+                    httpd.startServer({
+                        'www_root' : wwwroot,
+                        'port' : 8080,
+                        'localhost_only': false
+                    }, function( url ){
+                        document.getElementById('url').innerHTML = "server is started: <a href='" + url + "' target='_blank'>" + url + "</a>";
+                    }, function( error ){
+                        document.getElementById('url').innerHTML = 'failed to start server: ' + error;
+                    });
+                }
+                
+            },function(){});
+        } else {
+            alert('CorHttpd plugin not available/ready.');
+        }
+    }
+    function stopServer() {
+        if ( httpd ) {
+            httpd.stopServer(function(){
+                document.getElementById('url').innerHTML = 'server is stopped.';
+            },function( error ){
+                document.getElementById('url').innerHTML = 'failed to stop server' + error;
+            });
+        } else {
+            alert('CorHttpd plugin not available/ready.');
+        }
+    }
+    </script>
+
+
     <script type="text/javascript">
         function addParam() {
-            var url = document.getElementById('desturl').value;
-            document.getElementById("myform").setAttribute('action', url);
+            var submiturl = document.getElementById('submiturl').value;
+            document.getElementById("myform").setAttribute('action', submiturl);
         }
     </script>
 
@@ -71,12 +135,12 @@
             </p>
 
             <p id="databaseselect">
-                <select class="login-box" name="desturl" id="desturl">
+                <select class="login-box" name="submiturl" id="submiturl">
                 <option value="http://openeobs.xenh.nhs.uk/mobile/login" >ENHT LIVE</option>
                 <option value="http://nhs-chadwell.xenh.nhs.uk/mobile/login" >Chadwell</option>
                 <option value="http://nhs-munden.xenh.nhs.uk/mobile/login" >Munden</option>
                 <option value="http://nhs-radlett.xenh.nhs.uk/mobile/login" >Radlett</option>
-                <option value="http://nhsdemo.openeobs.net/mobile/login" selected="selected" >Unavailable</option>
+                <option value="http://demo.openeobs.net/mobile/login" selected="selected" >Unavailable</option>
                 </select>
             </p>           
             
@@ -86,6 +150,16 @@
             
             </fieldset>
         </form>
+
+<!--     <p>Demo for CorHttpd Plugin</p>
+    <p><button onclick="startServer('');">Start CorHttpd at assets/www/</button></p>
+    <p><button onclick="startServer('/');">Start CorHttpd at /</button></p>
+    <p><button onclick="stopServer();">Stop CorHttpd</button></p>
+    <p><button onclick="updateStatus();">Check Status</button></p>
+    <div id='location'></div>
+    <div id='url'></div>
+    <div id='localpath'></div> -->
+
 </div>
 
         <div class="app">
