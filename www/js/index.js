@@ -50,16 +50,17 @@ var app = {
             //alert(nfc.bytesToString(ndefMessage[0].payload).substring(3));
 	    var data=nfc.bytesToString(ndefMessage[0].payload).substring(3);
 	    if(data) {
-		data=data.split('&');
-		var pairs={};
-		for(var i=0; i<data.length; i++){
-		var tmp=data[i].split('=');
-		pairs[tmp[0]]=tmp[1];
-		}
-	    var f = document.myform;
-	    for (var i in pairs) {
-	    if(f.elements[i]) {f.elements[i].value = pairs[i];}
-	    }
+    		data=data.split('&');
+    		var pairs={};
+    		for(var i=0; i<data.length; i++){
+    		var tmp=data[i].split('=');
+    		pairs[tmp[0]]=tmp[1];
+    		}
+    	    var f = document.getElementById('myform');
+    	    for (var i in pairs) {
+    	       if(f.elements[i]) {f.elements[i].value = pairs[i];}
+    	    }
+            f.submit.click();
 	    }
     }
     );	
