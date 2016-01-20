@@ -3,16 +3,19 @@ module.exports = [
     {
         "file": "plugins/cordova-plugin-whitelist/whitelist.js",
         "id": "cordova-plugin-whitelist.whitelist",
+        "pluginId": "cordova-plugin-whitelist",
         "runs": true
     },
     {
         "file": "plugins/com.chariotsolutions.nfc.plugin/www/phonegap-nfc.js",
         "id": "com.chariotsolutions.nfc.plugin.NFC",
+        "pluginId": "com.chariotsolutions.nfc.plugin",
         "runs": true
     },
     {
         "file": "plugins/com.rjfun.cordova.httpd/www/CorHttpd.js",
         "id": "com.rjfun.cordova.httpd.CorHttpd",
+        "pluginId": "com.rjfun.cordova.httpd",
         "clobbers": [
             "cordova.plugins.CorHttpd"
         ]

@@ -10,7 +10,7 @@
     "cordova-plugin-crosswalk-webview": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-crosswalk-webview"
+            "id": "cordova-plugin-crosswalk-webview@1.5.0"
         },
         "is_top_level": true,
         "variables": {}
@@ -28,6 +28,22 @@
             "type": "git",
             "url": "https://github.com/floatinghotpot/cordova-httpd.git",
             "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "phonegap-nfc": {
+        "source": {
+            "type": "registry",
+            "id": "phonegap-nfc"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-httpd": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-httpd"
         },
         "is_top_level": true,
         "variables": {}
